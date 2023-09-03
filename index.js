@@ -11,10 +11,11 @@ const port = 5000;
 connectDb();
 
 //schemas 
-const crazyOutputPost = require("./EngineersModels/CrazyOutputModel")
+const PosterSchema = require("./EngineersModels/PosterPresentations");
+// const crazyOutputPost = require("./EngineersModels/CrazyOutputModel")
 const QuizSchema = require("./EngineersModels/TechnicalQuizSchema");
-const PosterPresentation = require("./EngineersModels/PosterPresentations");
 const PPTSchema = require("./EngineersModels/PPTSchema");
+const CrazyOutputPost = require('./EngineersModels/CrazyOutputModel');
 
 //middlewares
 app.use(express.json());
@@ -38,6 +39,12 @@ app.get('/',(req,res)=>{
 
 //Route-1:POST DATA
 app.post('/post-quiz',async(req,res)=>{
+  let regId = await QuizSchema.findOne({ regno: req.body.regno });
+  if (regId) {
+    return res
+      .status(400)
+      .json({ message: "Registration number already exists" });
+  }
     let quiz = new QuizSchema({
         regno:req.body.regno,
         year:req.body.year,
@@ -118,7 +125,13 @@ app.delete('/delete-quiz/:id',async(req,res)=>{
 */
 //ROUTE-1: To Post Data
 app.post("/post-poster",async(req,res)=>{
-    let poster = new PosterPresentation({
+  let regId = await PosterSchema.findOne({ regno: req.body.regno });
+  if (regId) {
+    return res
+      .status(400)
+      .json({ message: "Registration number already exists" });
+  }
+    let poster = new PosterSchema({
         regno:req.body.regno,
         year:req.body.year,
         branch:req.body.branch,
@@ -128,9 +141,9 @@ app.post("/post-poster",async(req,res)=>{
     res.json({message:"Registered Successfully",poster});
 });
 
-//ROUTE 2: To Get Data
+//ROUTE 2: To Get all Data
 app.get("/get-poster", async (req, res) => {
-  let getPoster = await PosterPresentation.find();
+  let getPoster = await PosterSchema.find();
   if (!getPoster) {
     res.status(404).json({ message: "No data found" });
   }
@@ -139,7 +152,7 @@ app.get("/get-poster", async (req, res) => {
 
 //ROUTE 3: To Delete Data
 app.delete("/delete-poster/:id", async (req, res) => {
-  let deletePoster = await PosterPresentation.findByIdAndDelete(req.params.id);
+  let deletePoster = await PosterSchema.findByIdAndDelete(req.params.id);
   if (!deletePoster) {
     res.status(404).json({ message: "No Data Found" });
   }
@@ -192,6 +205,10 @@ app.delete("/delete-poster/:id", async (req, res) => {
 
 //ROUTE-1: Post Data
 app.post('/post-ppt',async(req,res)=>{
+    const existedId = await PPTSchema.findOne({regno:req.body.regno});
+    if(existedId){
+      return res.status(400).json({message:"Registration number already exists"})
+    }
     let PPT = new PPTSchema({
         regno:req.body.regno,
         year:req.body.year,
@@ -266,7 +283,13 @@ app.delete("/delete-ppt/:id", async (req, res) => {
  */
 //ROUTE-1: To Post Data
 app.post('/post-crazy',async(req,res)=>{
-    let postCrazy = new crazyOutputPost({
+    const existingId = await CrazyOutputPost.findOne({regno:req.body.regno});
+    if(existingId){
+      return res
+        .status(400)
+        .json({ message: "Registration number already exists" });
+    }
+    let postCrazy = new CrazyOutputPost({
         regno:req.body.regno,
         year:req.body.year,
         branch:req.body.branch,
@@ -278,23 +301,20 @@ app.post('/post-crazy',async(req,res)=>{
 
 //ROUTE-2: To Get Data
 app.get("/get-crazy", async (req, res) => {
-  try {
-    let getCrazy = await crazyOutputPost.find();
-    if (!getCrazy || getCrazy.length === 0) {
+  
+    let getCrazy = await CrazyOutputPost.find();
+    if (!getCrazy) {
       res.status(404).json({ message: "No data found" });
     } else {
       res.json({ getCrazy });
     }
-  } catch (error) {
-    // Proper error handling
-    next(error);
-  }
+  
 });
 
 
 //ROUTE-3: To Delete Data
 app.delete("/delete-crazy/:id", async (req, res) => {
-  let deleteCrazy = await crazyOutputPost.findByIdAndDelete(req.params.id);
+  let deleteCrazy = await CrazyOutputPost.findByIdAndDelete(req.params.id);
   if (!deleteCrazy) {
     res.status(404).json({ message: "No Data Found" });
   }

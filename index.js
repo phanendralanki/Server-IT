@@ -327,6 +327,6 @@ app.delete("/delete-crazy/:id", async (req, res) => {
  */
 
 //listen server
-app.listen(port,()=>{
-    console.log(`server is running on port ${port}`);
-})
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`server is running on port ${port}`);
+});

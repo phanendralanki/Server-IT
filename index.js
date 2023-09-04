@@ -27,10 +27,6 @@ app.use(cors());
 //put - to update the data
 //delete - to delete
 
-app.get('/',(req,res)=>{
-    res.json({message:"welcome to my server"});
-})
-
 /* 
     ======================
       for Technical quiz
@@ -124,30 +120,29 @@ app.delete('/delete-quiz/:id',async(req,res)=>{
     =============================
 */
 //ROUTE-1: To Post Data
-app.post("/post-poster",async(req,res)=>{
-  let regId = await PosterSchema.findOne({ regno: req.body.regno });
-  if (regId) {
-    return res
-      .status(400)
-      .json({ message: "Registration number already exists" });
+app.post('/post-poster',async(req,res)=>{
+  let regId = await PosterSchema.findOne({regno:req.body.regno});
+  if(regId){
+    return res.status(400).json({message:"Registration number already exists"});
   }
-    let poster = new PosterSchema({
-        regno:req.body.regno,
-        year:req.body.year,
-        branch:req.body.branch,
-    });
+  let present = new PosterSchema({
+    regno:req.body.regno,
+    year:req.body.year,
+    branch:req.body.branch,
+  });
 
-    await poster.save();
-    res.json({message:"Registered Successfully",poster});
-});
+  await present.save();
+  res.json({message:"Registered Successfully",present});
+})
 
 //ROUTE 2: To Get all Data
-app.get("/get-poster", async (req, res) => {
+app.get("/get-poster", async (req,res) => {
   let getPoster = await PosterSchema.find();
   if (!getPoster) {
     res.status(404).json({ message: "No data found" });
-  }
+  }else{
   res.json({ getPoster });
+  }
 });
 
 //ROUTE 3: To Delete Data

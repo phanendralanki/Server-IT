@@ -4,7 +4,7 @@ const crazyOutputSchema = new mongoose.Schema(
     {
     regno:String,
     year:String,
-    branch:String
+    branch:String,
     },
     {
         timestamps:true

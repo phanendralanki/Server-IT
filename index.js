@@ -12,7 +12,6 @@ connectDb();
 
 //schemas 
 const PosterSchema = require("./EngineersModels/PosterPresentations");
-// const crazyOutputPost = require("./EngineersModels/CrazyOutputModel")
 const QuizSchema = require("./EngineersModels/TechnicalQuizSchema");
 const PPTSchema = require("./EngineersModels/PPTSchema");
 const CrazyOutputPost = require('./EngineersModels/CrazyOutputModel');
@@ -44,7 +43,7 @@ app.post('/post-quiz',async(req,res)=>{
     let quiz = new QuizSchema({
         regno:req.body.regno,
         year:req.body.year,
-        branch:req.body.branch,
+        branch:req.body.branch
     });
 
     await quiz.save();

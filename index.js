@@ -42,6 +42,7 @@ app.post('/post-quiz',async(req,res)=>{
   }
     let quiz = new QuizSchema({
         regno:req.body.regno,
+        mobile:req.body.mobile,
         year:req.body.year,
         branch:req.body.branch
     });

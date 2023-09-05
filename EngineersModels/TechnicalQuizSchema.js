@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 
 const QuizSchema = new mongoose.Schema({
     regno: String,
-    year:String,
-    branch:String
+    mobile:String,
+    branch:String,
+    year:String
 },
 {
     timestamps:true

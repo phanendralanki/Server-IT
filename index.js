@@ -127,6 +127,7 @@ app.post('/post-poster',async(req,res)=>{
   }
   let present = new PosterSchema({
     regno:req.body.regno,
+    mobile:req.body.mobile,
     year:req.body.year,
     branch:req.body.branch,
   });
@@ -206,6 +207,7 @@ app.post('/post-ppt',async(req,res)=>{
     }
     let PPT = new PPTSchema({
         regno:req.body.regno,
+        mobile:req.body.mobile,
         year:req.body.year,
         branch:req.body.branch
     });
@@ -286,6 +288,7 @@ app.post('/post-crazy',async(req,res)=>{
     }
     let postCrazy = new CrazyOutputPost({
         regno:req.body.regno,
+        mobile:req.body.mobile,
         year:req.body.year,
         branch:req.body.branch,
     });

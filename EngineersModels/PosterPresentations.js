@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const PosterSchema = new mongoose.Schema({
     regno:String,
+    mobile:String,
     year:String,
     branch:String,
 },

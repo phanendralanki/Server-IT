@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const PPTSchema = new mongoose.Schema({
     regno:String,
+    mobile:String,
     year:String,
     branch:String,
 },

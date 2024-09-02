@@ -20,12 +20,6 @@ const CrazyOutputPost = require('./EngineersModels/CrazyOutputModel');
 app.use(express.json());
 app.use(cors());
 
-//routes
-//get - to get
-//post - to add some data to server
-//put - to update the data
-//delete - to delete
-
 /* 
     ======================
       for Technical quiz
@@ -69,42 +63,6 @@ app.delete('/delete-quiz/:id',async(req,res)=>{
     res.status(200).json({message:"Delete Successfully"});
 });
 
-//ROUTE 4 : Update Data
-// app.put('/update-quiz/:id',async(req,res)=>{
-    
-//     let updateQuiz = await QuizSchema.findByIdAndUpdate(req.params.id);
-//     if(!updateQuiz){
-//         res.status(404).json({message:"No Data found"});
-//     }
-//     // if(!req.body.regno && !req.body.branch && !req.body.year){
-//     //     res.status(200).json({ message: "updated successfully" });
-//     // }
-//     else if(!req.body.regno && !req.body.year){
-//         updateQuiz.branch = req.body.branch; //branch
-//     }else if(!req.body.regno && !req.body.branch){
-//         updateQuiz.year = req.body.year; //year
-//     }else if(!req.body.year && !req.body.branch){
-//         updateQuiz.regno = req.body.regno; //regno
-//     }else if(!req.body.regno){
-//         updateQuiz.year = req.body.year;
-//         updateQuiz.branch = req.body.branch; 
-//     }else if(!req.body.year){
-//         updateQuiz.regno = req.body.regno;
-//         updateQuiz.branch = req.body.branch;
-//     }else if(!req.body.branch){
-//         updateQuiz.regno = req.body.regno;
-//         updateQuiz.year = req.body.year;
-//     }else{
-//          updateQuiz.regno = req.body.regno;
-//          updateQuiz.branch = req.body.branch;
-//          updateQuiz.year = req.body.year;
-//     }
-//     await updateQuiz.save();
-//     res.status(200).json({message:"updated successfully"});
-// })
-
-
-
 
 /* 
     ======================
@@ -119,6 +77,7 @@ app.delete('/delete-quiz/:id',async(req,res)=>{
      Poster Presentation Start
     =============================
 */
+
 //ROUTE-1: To Post Data
 app.post('/post-poster',async(req,res)=>{
   let regId = await PosterSchema.findOne({regno:req.body.regno});
@@ -156,35 +115,7 @@ app.delete("/delete-poster/:id", async (req, res) => {
 });
 
 
-//ROUTE 4: To Update Data
-// app.put("/update-poster/:id", async (req, res) => {
-//   let updatePoster = await PosterPresentation.findByIdAndUpdate(req.params.id);
-//   if (!updatePoster) {
-//     res.status(404).json({ message: "No Data found" });
-//   }
-//    else if (!req.body.regno && !req.body.year) {
-//     updatePoster.branch = req.body.branch; //branch
-//   } else if (!req.body.regno && !req.body.branch) {
-//     updatePoster.year = req.body.year; //year
-//   } else if (!req.body.year && !req.body.branch) {
-//     updatePoster.regno = req.body.regno; //regno
-//   } else if (!req.body.regno) {
-//     updatePoster.year = req.body.year;
-//     updatePoster.branch = req.body.branch;
-//   } else if (!req.body.year) {
-//     updatePoster.regno = req.body.regno;
-//     updatePoster.branch = req.body.branch;
-//   } else if (!req.body.branch) {
-//     updatePoster.regno = req.body.regno;
-//     updatePoster.year = req.body.year;
-//   } else {
-//     updatePoster.regno = req.body.regno;
-//     updatePoster.branch = req.body.branch;
-//     updatePoster.year = req.body.year;
-//   }
-//   await updatePoster.save();
-//   res.status(200).json({ message: "updated successfully" });
-// });
+
 
 /* 
     ===========================
@@ -234,38 +165,6 @@ app.delete("/delete-ppt/:id", async (req, res) => {
   res.status(200).json({ message: "Delete Successfully" });
 });
 
-//ROUTE-4: To Update Data
-// app.put("/update-ppt/:id", async (req, res) => {
-//   let updatePPT = await PPTSchema.findByIdAndUpdate(req.params.id);
-//   if (!updatePPT) {
-//     res.status(404).json({ message: "No Data found" });
-//   }
-//   // if (!req.body.regno && !req.body.branch && !req.body.year) {
-//   //   res.json({ message: "Please enter regno or branch or year" });
-//   // } 
-//   else if (!req.body.regno && !req.body.year) {
-//     updatePPT.branch = req.body.branch; //branch
-//   } else if (!req.body.regno && !req.body.branch) {
-//     updatePPT.year = req.body.year; //year
-//   } else if (!req.body.year && !req.body.branch) {
-//     updatePPT.regno = req.body.regno; //regno
-//   } else if (!req.body.regno) {
-//     updatePPT.year = req.body.year;
-//     updatePPT.branch = req.body.branch;
-//   } else if (!req.body.year) {
-//     updatePPT.regno = req.body.regno;
-//     updatePPT.branch = req.body.branch;
-//   } else if (!req.body.branch) {
-//     updatePPT.regno = req.body.regno;
-//     updatePPT.year = req.body.year;
-//   } else {
-//     updatePPT.regno = req.body.regno;
-//     updatePPT.branch = req.body.branch;
-//     updatePPT.year = req.body.year;
-//   }
-//   await updatePPT.save();
-//   res.status(200).json({ message: "updated successfully" });
-// });
 
 /*
     =============================
@@ -318,9 +217,6 @@ app.delete("/delete-crazy/:id", async (req, res) => {
   }
   res.status(200).json({ message: "Delete Successfully" });
 });
-
-//ROUTE-4: To Update Data
-
 
 
 /*
